@@ -41,12 +41,6 @@
                 box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
                 overflow: hidden;
                 padding: 25px;
-                transition: filter 0.3s ease;
-            }
-
-            body.modal-active .calendar-container {
-                filter: blur(5px);
-                pointer-events: none;
             }
 
             h1 {
@@ -56,9 +50,9 @@
             }
             ul {
                 margin: 0;
+                padding-left: 20px; /* Menambahkan sedikit padding agar list rapi */
             }
 
-            /* PARAGRAF DESKRIPSI BARU */
             .subtitle {
                 text-align: center;
                 color: var(--text-light);
@@ -67,12 +61,12 @@
                 font-size: 15px;
                 padding: 0 10px;
             }
-            /* PARAGRAF DESKRIPSI BARU */
+
             .subtitle2 {
-                /* text-align: center; */
                 color: var(--text-light);
                 margin: 0;
                 font-size: 15px;
+                line-height: 1.6; /* Menambah spasi antar baris list */
             }
 
             .preparesub {
@@ -95,7 +89,7 @@
                 transition: all 0.3s ease;
                 border-bottom: 3px solid transparent;
                 margin-bottom: -2px;
-                flex-grow: 1; /* Membuat tombol memenuhi ruang */
+                flex-grow: 1;
                 text-align: center;
             }
             .tab-button:hover {
@@ -120,109 +114,11 @@
                 min-height: 500px;
             }
 
-            .modal-overlay {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, 0.6);
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                z-index: 1000;
-                opacity: 0;
-                visibility: hidden;
-                transition: opacity 0.3s ease, visibility 0.3s ease;
-            }
-            .modal-overlay.show {
-                opacity: 1;
-                visibility: visible;
-            }
-            .modal-content {
-                background-color: var(--bg-white);
-                padding: 30px;
-                border-radius: 12px;
-                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-                width: 90%;
-                max-width: 400px;
-                text-align: center;
-                position: relative;
-                transform: translateY(-20px);
-                transition: transform 0.3s ease;
-            }
-            .modal-overlay.show .modal-content {
-                transform: translateY(0);
-            }
-            .modal-content h2 {
-                margin-top: 0;
-                color: var(--text-dark);
-            }
-            .modal-content p {
-                color: var(--text-light);
-                margin-bottom: 20px;
-            }
-            .close-button {
-                position: absolute;
-                top: 10px;
-                right: 15px;
-                font-size: 28px;
-                font-weight: bold;
-                color: #aaa;
-                cursor: pointer;
-            }
-            .input-group {
-                display: flex;
-                gap: 10px;
-            }
-            #password-input {
-                flex-grow: 1;
-                padding: 10px 15px;
-                border: 1px solid #ccc;
-                border-radius: 8px;
-                font-size: 16px;
-            }
-            #submit-password {
-                padding: 10px 20px;
-                border: none;
-                background-color: var(--secondary-color);
-                color: white;
-                border-radius: 8px;
-                font-size: 16px;
-                cursor: pointer;
-                transition: background-color 0.2s ease;
-            }
-            #submit-password:hover {
-                background-color: var(--primary-color);
-            }
-            .error-message {
-                color: #e74c3c;
-                font-size: 14px;
-                margin-top: 10px;
-                height: 20px;
-            }
-
-            @keyframes shake {
-                0%,
-                100% {
-                    transform: translateX(0);
-                }
-                25% {
-                    transform: translateX(-5px);
-                }
-                75% {
-                    transform: translateX(5px);
-                }
-            }
-            .shake {
-                animation: shake 0.3s ease-in-out;
-            }
-
             /* ===== MOBILE FRIENDLY STYLING ===== */
             @media screen and (max-width: 768px) {
                 body {
                     padding: 10px;
-                    align-items: flex-start; /* Konten mulai dari atas */
+                    align-items: flex-start;
                 }
                 .calendar-container {
                     padding: 15px;
@@ -235,18 +131,12 @@
                     font-size: 0.875rem; /* 14px */
                 }
                 .tab-button {
-                    padding: 10px 5px; /* Kurangi padding tab */
+                    padding: 10px 5px;
                     font-size: 0.875rem; /* 14px */
                 }
                 iframe {
                     min-height: 450px;
-                    height: 70vh; /* iframe sedikit lebih tinggi di mobile */
-                }
-                .modal-content {
-                    padding: 25px;
-                }
-                .input-group {
-                    flex-direction: column; /* Pindahkan tombol ke bawah input */
+                    height: 70vh;
                 }
             }
         </style>
@@ -268,11 +158,10 @@
                 </button>
             </div>
             <div id="umum" class="calendar-content active">
-                <!-- DISINI -->
                 <div class="preparesub">
                     <p class="subtitle2">
                         Kalender Umum berisikan beberapa hal seperti event
-                        tahunan DNCC beserta persiapannya
+                        tahunan DNCC beserta persiapannya.
                     </p>
                 </div>
                 <iframe
@@ -281,23 +170,19 @@
                 ></iframe>
             </div>
             <div id="internal" class="calendar-content">
-                <!-- DISINI -->
                 <div class="preparesub">
                     <p class="subtitle2">
-                        Kalender Internal berisikan beberapa hal seperti :
+                        Kalender Internal berisikan beberapa hal seperti:
                     </p>
                     <ul>
                         <li class="subtitle2">
-                            Agenda Rapat : Rapat General, Rapat Event, Rapat
-                            dsb.
+                            Agenda Rapat: Rapat General, Rapat Event, dsb.
                         </li>
                         <li class="subtitle2">
-                            Event Internal : Fun Match, Internal UpSkilling,
+                            Event Internal: Fun Match, Internal UpSkilling.
                         </li>
                         <li class="subtitle2">Ulang Tahun Member</li>
                     </ul>
-
-                    <p class="subtitle2">dan sebagainya</p>
                 </div>
                 <iframe
                     src="https://calendar.google.com/calendar/embed?src=b097bc560eb11e8350785d49f7dfb3c541d76ea9a472a180d9ff5188d0ee5f95%40group.calendar.google.com&ctz=Asia%2FJakarta"
@@ -306,106 +191,41 @@
             </div>
         </div>
 
-        <div id="password-modal-overlay" class="modal-overlay">
-            <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Akses Terbatas</h2>
-                <p>
-                    Silakan masukkan password untuk membuka Kalender Internal.
-                </p>
-                <div class="input-group">
-                    <input
-                        type="password"
-                        id="password-input"
-                        placeholder="Password..."
-                        autocomplete="off"
-                    />
-                    <button id="submit-password">Buka</button>
-                </div>
-                <p id="error-message" class="error-message"></p>
-            </div>
-        </div>
-
         <script>
-            // JavaScript tidak ada perubahan, sudah kompatibel.
             const tabButtons = document.querySelectorAll(".tab-button");
-            const contents = document.querySelectorAll(".calendar-content");
-            const modalOverlay = document.getElementById(
-                "password-modal-overlay"
-            );
-            const modalContent = document.querySelector(".modal-content");
-            const closeButton = document.querySelector(".close-button");
-            const submitButton = document.getElementById("submit-password");
-            const passwordInput = document.getElementById("password-input");
-            const errorMessage = document.getElementById("error-message");
-            const body = document.body;
-            const correctPassword = "udinuspolke";
 
+            // Fungsi untuk mengganti tab yang aktif
             function switchTab(targetId) {
+                // Sembunyikan semua konten dan hapus status aktif dari tab
                 document
                     .querySelector(".tab-button.active")
                     .classList.remove("active");
                 document
                     .querySelector(".calendar-content.active")
                     .classList.remove("active");
+
+                // Tampilkan konten dan aktifkan tab yang diklik
                 const newActiveButton = document.querySelector(
                     `.tab-button[data-id="${targetId}"]`
                 );
                 const newActiveContent = document.getElementById(targetId);
+
                 newActiveButton.classList.add("active");
                 newActiveContent.classList.add("active");
             }
 
+            // Tambahkan event listener untuk setiap tombol tab
             tabButtons.forEach((button) => {
                 button.addEventListener("click", () => {
                     const targetId = button.dataset.id;
                     const currentActiveId =
                         document.querySelector(".tab-button.active").dataset.id;
-                    if (targetId === currentActiveId) return;
-                    if (targetId === "internal") {
-                        passwordInput.value = "";
-                        errorMessage.textContent = "";
-                        modalOverlay.classList.add("show");
-                        body.classList.add("modal-active");
-                        passwordInput.focus();
-                    } else {
+
+                    // Jika tab yang diklik belum aktif, ganti tab
+                    if (targetId !== currentActiveId) {
                         switchTab(targetId);
                     }
                 });
-            });
-
-            function closeModal() {
-                modalOverlay.classList.remove("show");
-                body.classList.remove("modal-active");
-            }
-
-            function checkPassword() {
-                if (passwordInput.value === correctPassword) {
-                    closeModal();
-                    switchTab("internal");
-                } else {
-                    errorMessage.textContent =
-                        "Password salah, silakan coba lagi.";
-                    modalContent.classList.add("shake");
-                    passwordInput.value = "";
-                    passwordInput.focus();
-                    setTimeout(() => {
-                        modalContent.classList.remove("shake");
-                    }, 300);
-                }
-            }
-
-            submitButton.addEventListener("click", checkPassword);
-            passwordInput.addEventListener("keyup", (event) => {
-                if (event.key === "Enter") {
-                    checkPassword();
-                }
-            });
-            closeButton.addEventListener("click", closeModal);
-            modalOverlay.addEventListener("click", (event) => {
-                if (event.target === modalOverlay) {
-                    closeModal();
-                }
             });
         </script>
     </body>
